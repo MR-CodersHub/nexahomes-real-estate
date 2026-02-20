@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Property Details | NexaHomes</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-user-icon"><i class="fas fa-user"></i></a>
+                <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="elite-residences.html">Elite Residences</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="properties.html" class="active">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger"
+                        style="cursor: pointer; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.3s;">
+                        <i class="fas fa-user" style="color: #fff;"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown">
+                        <!-- Content rendered via JS -->
+                    </div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Property Details Section -->
+    <section class="property-details-page" style="padding-top: 150px;">
+        <div class="container">
+            <!-- Back Link -->
+            <a href="properties.html" style="color: #888; margin-bottom: 20px; display: inline-block;"><i
+                    class="fas fa-arrow-left"></i> Back to Properties</a>
+
+            <!-- Header Info -->
+            <div class="details-header"
+                style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h1 id="prop-title" style="font-size: 2.5rem; margin-bottom: 10px;">Property Title</h1>
+                    <p id="prop-location" style="font-size: 1.1rem; color: #aaa;"><i class="fas fa-map-marker-alt"
+                            style="color: var(--accent-color);"></i> Location</p>
+                </div>
+                <div style="text-align: right;">
+                    <div id="prop-price" style="font-size: 2rem; color: var(--accent-color); font-weight: 700;">$0</div>
+                    <span id="prop-status" class="property-tag"
+                        style="position: static; display: inline-block; margin-top: 10px;">For Sale</span>
+                </div>
+            </div>
+
+            <!-- Gallery Grid (1 Main + 3 Smaller) -->
+            <div class="gallery-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; height: 500px; margin-bottom: 50px;">
+                <div class="main-img" style="height: 100%;">
+                    <img id="main-image" src="" alt="Property Main"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid var(--glass-border);"
+                        onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                </div>
+                <div class="sub-imgs" style="display: flex; flex-direction: column; gap: 20px; height: 100%;">
+                    <img src="assets/images/hero.png"
+                        style="flex: 1; width: 100%; object-fit: cover; border-radius: 12px; border: 1px solid var(--glass-border); opacity: 0.7;">
+                    <img src="assets/images/hero.png"
+                        style="flex: 1; width: 100%; object-fit: cover; border-radius: 12px; border: 1px solid var(--glass-border); opacity: 0.7;">
+                </div>
+            </div>
+
+            <div class="details-content" style="display: flex; gap: 50px; flex-wrap: wrap;">
+                <!-- Main Info -->
+                <div style="flex: 2; min-width: 300px;">
+                    <div class="specs-bar"
+                        style="background: var(--card-bg); padding: 30px; border-radius: 12px; display: flex; justify-content: space-around; border: 1px solid var(--glass-border); margin-bottom: 40px;">
+                        <div class="spec-item text-center">
+                            <i class="fas fa-bed"
+                                style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 10px;"></i>
+                            <div id="prop-beds" style="font-weight: 700; font-size: 1.2rem;">0</div>
+                            <span style="color: #888; font-size: 0.9rem;">Bedrooms</span>
+                        </div>
+                        <div class="spec-item text-center">
+                            <i class="fas fa-bath"
+                                style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 10px;"></i>
+                            <div id="prop-baths" style="font-weight: 700; font-size: 1.2rem;">0</div>
+                            <span style="color: #888; font-size: 0.9rem;">Bathrooms</span>
+                        </div>
+                        <div class="spec-item text-center">
+                            <i class="fas fa-ruler-combined"
+                                style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 10px;"></i>
+                            <div id="prop-sqft" style="font-weight: 700; font-size: 1.2rem;">0</div>
+                            <span style="color: #888; font-size: 0.9rem;">Sq Ft</span>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Description</h3>
+                    <p style="line-height: 1.8; color: #ccc; margin-bottom: 40px;">
+                        Experience the epitome of luxury living in this stunning residence. Meticulously designed with
+                        premium finishes and thoughtful details throughout, this home offers an unparalleled lifestyle.
+                        Features include spacious open-plan living areas, floor-to-ceiling windows flooding the space
+                        with natural light, and a state-of-the-art chef's kitchen. The master suite provides a private
+                        sanctuary with a spa-inspired bath and custom walk-in closets. Located in a prestigious
+                        neighborhood, you are moments away from world-class dining, shopping, and entertainment.
+                    </p>
+
+                    <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Features & Amenities</h3>
+                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; color: #ccc;">
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Smart
+                            Home Technology</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Private
+                            Pool & Spa</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Home
+                            Theater</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Wine
+                            Cellar</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> 24/7
+                            Security</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i>
+                            Concierge Service</li>
+                    </ul>
+                </div>
+
+                <!-- Sidebar Inquiry -->
+                <aside style="flex: 1; min-width: 300px;">
+                    <div
+                        style="background: var(--card-bg); border: 1px solid var(--glass-border); padding: 30px; border-radius: 12px; position: sticky; top: 100px;">
+                        <h3 style="margin-bottom: 20px;">Interested in this property?</h3>
+                        <p style="color: #888; margin-bottom: 30px;">Contact our agents to schedule a private viewing or
+                            request more information.</p>
+
+                        <a href="contact.html" class="btn"
+                            style="width: 100%; text-align: center; margin-bottom: 15px;">Inquire Now</a>
+                        <a href="tel:+15551234567" class="btn btn-outline" style="width: 100%; text-align: center;"><i
+                                class="fas fa-phone"></i> Call Agent</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Home</a></li>
+                            <li><a href="properties.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Properties</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Blog</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    About Us</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    FAQ</a></li>
+                            <li><a href="privacy-policy.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Terms of
+                                    Service</a></li>
+                            <li><a href="sitemap.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (id && typeof properties !== 'undefined') {
+                const prop = properties.find(p => p.id == id);
+                if (prop) {
+                    document.title = `${prop.title} | NexaHomes`;
+                    document.getElementById('prop-title').innerText = prop.title;
+                    document.getElementById('prop-location').innerHTML = `<i class="fas fa-map-marker-alt" style="color: var(--accent-color);"></i> ${prop.location}`;
+                    document.getElementById('prop-price').innerText = prop.price;
+                    document.getElementById('prop-status').innerText = prop.status;
+                    document.getElementById('prop-beds').innerText = prop.beds;
+                    document.getElementById('prop-baths').innerText = prop.baths;
+                    document.getElementById('prop-sqft').innerText = prop.sqft;
+
+                    const mainImg = document.getElementById('main-image');
+                    mainImg.src = prop.image;
+                    mainImg.alt = prop.title;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

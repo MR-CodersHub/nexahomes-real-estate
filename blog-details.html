@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Top 10 Design Trends for 2026 | NexaHomes Blog</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+    <style>
+        /* Blog Detail Specific Styles */
+        .article-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 60px;
+        }
+
+        .article-header {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #000;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: #ddd;
+            font-size: 0.95rem;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-meta i {
+            color: var(--accent-color);
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .article-content h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .article-content p {
+            margin-bottom: 25px;
+        }
+
+        .article-content img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 1px solid var(--glass-border);
+        }
+
+        blockquote {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--accent-color);
+            padding: 30px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #fff;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .share-section {
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 30px 0;
+            margin: 60px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .share-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .share-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .share-icon:hover {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        .related-posts {
+            background: #0b0d11;
+            padding: 80px 0;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Reusing card styles roughly */
+        .related-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .related-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-color);
+        }
+
+        .related-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+
+        .related-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+
+        .related-card:hover .related-img {
+            transform: scale(1.1);
+        }
+
+        .related-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .related-title {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .related-card:hover .related-title {
+            color: var(--accent-color);
+        }
+
+        .related-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .related-date::before {
+            content: '';
+            width: 12px;
+            height: 1px;
+            background: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-hero {
+                height: 50vh;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-account-btn" id="mobileAccountBtn" aria-label="User Account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="menu-toggle-wrapper" style="position: relative; width: 44px; height: 44px;">
+                    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget (Desktop Only) -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger"
+                        style="cursor: pointer; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.3s;">
+                        <i class="fas fa-user" style="color: #fff;"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="article-hero">
+        <div class="container article-header">
+            <span class="article-category">Interior Design</span>
+            <h1 class="article-title">Top 10 Interior Design Trends Defining 2026</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Elena Rodriguez</span>
+                <span><i class="far fa-calendar"></i> February 10, 2026</span>
+                <span><i class="far fa-clock"></i> 5 min read</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <p class="lead" style="font-size: 1.3rem; color: #fff; margin-bottom: 40px;">
+            As we move further into the decade, luxury real estate is seeing a paradigm shift towards "Quiet Luxury" and
+            sustainable opulence. It is no longer just about the price tag, but the feeling of the space.
+        </p>
+
+        <p>The definition of luxury is fluid, constantly evolving with cultural shifts and technological advancements.
+            In 2026, we are witnessing a departure from cold minimalism towards warm, textured, and deeply personal
+            spaces. Homeowners are seeking sanctuaries that offer not just visual appeal, but emotional resonance and
+            physical well-being.</p>
+
+        <h2>1. Biophilic Design 2.0</h2>
+        <p>It's no longer just about having a few potted plants in the corner. Biophilic design has matured into a
+            structural philosophy. We are seeing living walls that span multiple floors, indoor trees acting as focal
+            points in atriums, and seamless transitions between indoor and outdoor spaces using floor-to-ceiling
+            retractable glass.</p>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+            alt="Biophilic Design Example">
+        <p>This trend is driven by a desire to reconnect with nature in increasingly dense urban environments. The use
+            of natural materials—stone, unpolished wood, and clay—complements this greenery, creating spaces that feel
+            grounded and organic.</p>
+
+        <blockquote>
+            "True luxury is shifting from ostentatious displays of wealth to curated experiences of well-being, privacy,
+            and connection with nature."
+        </blockquote>
+
+        <h2>2. Smart Wellness Spaces</h2>
+        <p>Home gyms are evolving into full-fledged wellness centers. The basics of a treadmill and weights are being
+            replaced or augmented by cryotherapy chambers, infrared saunas, and meditation pods. Lighting systems now
+            sync with circadian rhythms, adjusting color temperature throughout the day to promote better sleep and
+            energy levels.</p>
+
+        <h2>3. The Return of Dark Woods</h2>
+        <p>After years of light European oak supremacy, rich walnuts, mahogany, and ebony tones are making a strong
+            comeback. These darker woods add immediate depth, warmth, and a sense of history to a room. When paired with
+            lighter fabrics and modern lighting, they create a sophisticated contrast that feels timeless yet
+            contemporary.</p>
+
+        <!-- Share Section -->
+        <div class="share-section">
+            <span style="font-weight: 600; color: #fff;">Share this article:</span>
+            <div class="share-icons">
+                <a href="#" class="share-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="share-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="share-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="share-icon"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <div class="container">
+            <h3 style="font-size: 2rem; margin-bottom: 30px;">Related Stories</h3>
+            <div class="related-grid">
+
+                <a href="blog-details.html" class="related-card">
+                    <div class="related-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="related-img" alt="Urban Skylines"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="related-content">
+                        <div class="related-date">Feb 05, 2026</div>
+                        <h4 class="related-title">Investing in Urban Skylines: A 2026 Outlook</h4>
+                    </div>
+                </a>
+
+                <a href="blog-details.html" class="related-card">
+                    <div class="related-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="related-img" alt="Home Art"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="related-content">
+                        <div class="related-date">Jan 15, 2026</div>
+                        <h4 class="related-title">Curating the Perfect Home Art Collection</h4>
+                    </div>
+                </a>
+
+                <a href="blog-details.html" class="related-card">
+                    <div class="related-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1556955112-28cde3817b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="related-img" alt="Smart Home Security"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="related-content">
+                        <div class="related-date">Jan 10, 2026</div>
+                        <h4 class="related-title">Smart Home Security: Beyond the Basics</h4>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Home</a></li>
+                            <li><a href="properties.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Properties</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Blog</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    About Us</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    FAQ</a></li>
+                            <li><a href="privacy-policy.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Terms of
+                                    Service</a></li>
+                            <li><a href="sitemap.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

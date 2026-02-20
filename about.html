@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>About Us | NexaHomes</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-account-btn" id="mobileAccountBtn" aria-label="User Account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="menu-toggle-wrapper" style="position: relative; width: 44px; height: 44px;">
+                    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="elite-residences.html">Elite Residences</a>
+                <a href="about.html" class="active">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger"
+                        style="cursor: pointer; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.3s;">
+                        <i class="fas fa-user" style="color: #fff;"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-header"
+        style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/images/hero.png'); background-size: cover; background-position: center; padding: 150px 0 150px;">
+        <div class="container text-center">
+            <h1 style="font-size: 3.5rem; margin-bottom: 15px;">Redefining Luxury</h1>
+            <p style="max-width: 600px; margin: 0 auto; font-size: 1.2rem; color: #ddd;">Connecting the world's most
+                affluent clientele with the most extraordinary properties.</p>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section>
+        <div class="container">
+            <div class="story-content">
+                <div class="story-img">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="NexaHomes Interior" onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                </div>
+                <div class="story-text">
+                    <span class="section-subtitle">Our Journey</span>
+                    <h2>A Legacy of Excellence</h2>
+                    <p>At NexaHomes, we believe that real estate is not just about transactions; it's about curating a
+                        lifestyle. Founded over a decade ago with a vision to revolutionize the luxury property market,
+                        we have established ourselves as the global bridge between exceptional properties and discerning
+                        buyers.</p>
+                    <p>Our approach is rooted in a deep understanding of the market, an unwavering commitment to
+                        quality, and a personalized service model that puts our clients at the center of everything we
+                        do.</p>
+
+                    <div style="margin-top: 40px; border-left: 3px solid var(--accent-color); padding-left: 20px;">
+                        <h4 style="margin-bottom: 10px; color: #fff;">Our Mission</h4>
+                        <p style="margin-bottom: 0;">To deliver an unmatched real estate experience through innovation,
+                            integrity, and a relentless pursuit of perfection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section style="padding: 0; background-color: rgba(255,255,255,0.02);">
+        <div class="container">
+            <div class="stats-strip">
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$2B+</span>
+                    <span class="stat-label">Volume Sold</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">40+</span>
+                    <span class="stat-label">Global Cities</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Our Philosophy</span>
+                <h2 class="section-title">Core Values</h2>
+            </div>
+
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                <div class="value-card">
+                    <i class="fas fa-handshake value-icon"></i>
+                    <h3>Unwavering Trust</h3>
+                    <p style="color: #aaa; font-size: 0.95rem;">Building lasting relationships through transparency,
+                        integrity, and discretion in every deal.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-chart-line value-icon"></i> <!-- Changed icon -->
+                    <h3>Market Expertise</h3>
+                    <p style="color: #aaa; font-size: 0.95rem;">Leveraging deep data and industry insights to provide
+                        you with the competitive edge.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-gem value-icon"></i> <!-- Changed icon -->
+                    <h3>True Exclusivity</h3>
+                    <p style="color: #aaa; font-size: 0.95rem;">Access to off-market listings and premium properties not
+                        available to the general public.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-users value-icon"></i> <!-- Changed icon -->
+                    <h3>Client-First</h3>
+                    <p style="color: #aaa; font-size: 0.95rem;">Tailoring every aspect of the buying or selling process
+                        to your unique needs and desires.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">The Experts</span>
+                <h2 class="section-title">Leadership Team</h2>
+            </div>
+            <div class="grid" id="team-grid"
+                style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto;">
+                <!-- Loaded via JS -->
+            </div>
+
+            <div class="text-center" style="margin-top: 80px;">
+                <h3 style="margin-bottom: 25px;">Ready to find your dream home?</h3>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="properties.html" class="btn">Explore Properties</a>
+                    <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <!-- Newsletter Section -->
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Content -->
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+
+                    <!-- Brand Column -->
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Home</a></li>
+                            <li><a href="elite-residences.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i>
+                                    Elite Residences</a></li>
+                            <li><a href="properties.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Properties</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Blog</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    About Us</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Services/Legal -->
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    FAQ</a></li>
+                            <li><a href="privacy-policy.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Terms of
+                                    Service</a></li>
+                            <li><a href="sitemap.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

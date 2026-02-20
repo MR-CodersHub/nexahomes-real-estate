@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Insights & Stories | NexaHomes Blog</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+    <style>
+        /* Blog Specific Styles */
+        .blog-hero {
+            position: relative;
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(8, 10, 13, 0.7), rgba(8, 10, 13, 0.9)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #c0c0c0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 500px;
+            margin: 30px auto 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            padding-right: 50px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Featured Article */
+        .featured-section {
+            margin-bottom: 80px;
+        }
+
+        .featured-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 15px;
+        }
+
+        .section-label {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: #fff;
+            position: relative;
+        }
+
+        .section-label::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .featured-card {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .featured-img-col {
+            flex: 1.5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .featured-card:hover .featured-img {
+            transform: scale(1.03);
+        }
+
+        .featured-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: fit-content;
+            margin-bottom: 20px;
+        }
+
+        .featured-title {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .featured-excerpt {
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* Filter Tabs */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: #ccc;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            padding-bottom: 60px;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+            /* Removes any inline-block spacing */
+        }
+
+        .blog-card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-category {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(8, 10, 13, 0.85);
+            backdrop-filter: blur(5px);
+            color: var(--accent-color);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .card-meta i {
+            color: var(--accent-color);
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .blog-card:hover .card-title {
+            color: var(--accent-color);
+        }
+
+        .card-excerpt {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            text-decoration: none;
+            margin-top: auto;
+            width: fit-content;
+        }
+
+        .read-more-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+            color: var(--accent-color);
+        }
+
+        .read-more-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .read-more-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Load More */
+        .load-more-container {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        @media (max-width: 900px) {
+            .featured-card {
+                flex-direction: column;
+            }
+
+            .featured-img-col {
+                height: 300px;
+                flex: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-account-btn" id="mobileAccountBtn" aria-label="User Account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="menu-toggle-wrapper" style="position: relative; width: 44px; height: 44px;">
+                    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="elite-residences.html">Elite Residences</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger"
+                        style="cursor: pointer; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.3s;">
+                        <i class="fas fa-user" style="color: #fff;"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="blog-hero">
+        <div class="container">
+            <span class="section-subtitle">The Nexa Journal</span>
+            <h1>Insights & Stories</h1>
+            <p style="max-width: 600px; margin: 0 auto; color: #ccc; font-size: 1.1rem; line-height: 1.6;">Curated
+                perspectives on luxury living, architectural trends, and the global real estate market.</p>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search articles...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+
+            <!-- Featured Article -->
+            <div class="featured-section">
+                <div class="featured-header">
+                    <span class="section-label">Featured Story</span>
+                </div>
+
+                <article class="featured-card">
+                    <div class="featured-img-col">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                            alt="Featured Article" class="featured-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';">
+                    </div>
+                    <div class="featured-content">
+                        <span class="featured-badge">Future Living</span>
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Feb 15, 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                        <h2 class="featured-title">The Future of Sustainable Luxury: Net-Zero Estates</h2>
+                        <p class="featured-excerpt">Discover how world-class architects are redefining opulence by
+                            integrating cutting-edge green technologies, creating homes that are as kind to the planet
+                            as they are breathtaking.</p>
+                        <a href="blog-details.html" class="read-more-btn" style="font-size: 1rem;">Read Full Story <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="featured-header">
+                <span class="section-label">Latest Insights</span>
+            </div>
+
+            <!-- Filtering -->
+            <div class="category-filter">
+                <button class="filter-btn active">All Stories</button>
+                <button class="filter-btn">Market Trends</button>
+                <button class="filter-btn">Architecture</button>
+                <button class="filter-btn">Interior Design</button>
+                <button class="filter-btn">Lifestyle</button>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blog-posts-grid">
+
+                <!-- Blog Post 1 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Design</span>
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Interior Design Trends" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Feb 10, 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Top 10 Interior Design Trends Defining
+                                2026</a></h3>
+                        <p class="card-excerpt">From biophilic elements to the return of dark woods, explore the key
+                            aesthetics shaping luxury interiors this year.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Market</span>
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Urban Real Estate" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Feb 05, 2026</span>
+                            <span><i class="far fa-clock"></i> 7 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Investing in Urban Skylines: A 2026
+                                Outlook</a></h3>
+                        <p class="card-excerpt">Why penthouse acquisitions in major metropolitan hubs remain the gold
+                            standard for portfolio diversification.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Architecture</span>
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Modern Architecture" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 28, 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">The Rise of the Eco-Mansion</a></h3>
+                        <p class="card-excerpt">Sustainability meets opulence. How modern architects are designing
+                            carbon-neutral estates without compromising on luxury.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Lifestyle</span>
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Luxury Lifestyle" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 15, 2026</span>
+                            <span><i class="far fa-clock"></i> 4 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Curating the Perfect Home Art
+                                Collection</a></h3>
+                        <p class="card-excerpt">Expert advice on selecting, lighting, and displaying fine art pieces to
+                            elevate your residence's ambiance.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 5 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Technology</span>
+                        <img src="https://images.unsplash.com/photo-1556955112-28cde3817b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Smart Home" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 10, 2026</span>
+                            <span><i class="far fa-clock"></i> 5 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Smart Home Security: Beyond the
+                                Basics</a></h3>
+                        <p class="card-excerpt">Wait for facial recognition entry? The latest advancements in
+                            residential security technology for high-net-worth individuals.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 6 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Destinations</span>
+                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Goa Holiday Home" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Jan 02, 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Hidden Gems: Emerging Luxury Markets</a>
+                        </h3>
+                        <p class="card-excerpt">Discover the untouched coastal towns and mountain retreats that are
+                            becoming the next hotspots for luxury vacation homes.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 7 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Wellness</span>
+                        <img src="https://images.unsplash.com/photo-1596178060671-7a8d2a6b4878?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Wellness Spaces" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 28, 2025</span>
+                            <span><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">The Ultimate Home Spa Experience</a></h3>
+                        <p class="card-excerpt">From cryotherapy chambers to sensory deprivation tanks, explore the
+                            newest must-have amenities for personal wellness.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 8 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Investment</span>
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560eb3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Financial" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 15, 2025</span>
+                            <span><i class="far fa-clock"></i> 9 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Cryptocurrency and Real Estate</a></h3>
+                        <p class="card-excerpt">How digital assets are transforming property transactions and ownership
+                            models in the ultra-luxury sector.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 9 -->
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-category">Architecture</span>
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Heritage Homes" class="card-img"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar"></i> Dec 10, 2025</span>
+                            <span><i class="far fa-clock"></i> 7 min read</span>
+                        </div>
+                        <h3 class="card-title"><a href="blog-details.html"
+                                style="text-decoration: none; color: inherit;">Restoring Historic Estates</a></h3>
+                        <p class="card-excerpt">The delicate art of preserving architectural heritage while integrating
+                            modern luxury and convenience.</p>
+                        <a href="blog-details.html" class="read-more-btn">Read Article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- More Content Loader -->
+            <div class="load-more-container">
+                <button class="btn-outline" style="padding: 12px 40px; border-width: 2px;">Load More Stories</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Home</a></li>
+                            <li><a href="elite-residences.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i>
+                                    Elite Residences</a></li>
+                            <li><a href="properties.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Properties</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Blog</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    About Us</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    FAQ</a></li>
+                            <li><a href="privacy-policy.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Terms of
+                                    Service</a></li>
+                            <li><a href="sitemap.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Simple Filter Functionality (Visual Demo)
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

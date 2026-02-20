@@ -1,0 +1,553 @@
+/* Mobile Navigation & Responsive Fixes */
+@media (max-width: 992px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .properties-grid,
+    .city-grid,
+    .blog-grid,
+    .experience-grid,
+    .elite-card-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+/* Default Hidden state for mobile controls */
+.mobile-header-controls {
+    display: none;
+}
+
+/* Hide account panel and overlay on desktop & tablet */
+.account-panel,
+.panel-overlay,
+.mobile-account-panel,
+.account-overlay {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+        /* Reduced from 30px for more space */
+    }
+
+    /* Header & Navigation Fixes for Mobile (<=768px) */
+    .container.flex.justify-between.items-center {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100%;
+        position: relative;
+    }
+
+    /* Logo stays on the LEFT */
+    header .logo {
+        order: 1;
+        margin-right: auto;
+        position: relative;
+        left: 0;
+        transform: none;
+        z-index: 10001;
+    }
+
+    /* Unified Controls Container for Side-by-Side Alignment */
+    .mobile-header-controls {
+        display: flex !important;
+        align-items: center;
+        gap: 15px;
+        /* Increased gap for better spacing */
+        order: 2;
+        margin-left: auto;
+        z-index: 10002;
+    }
+
+    /* Explicit Wrapper Styling to define positioning context */
+    .menu-toggle-wrapper {
+        position: relative !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-account-btn,
+    .menu-toggle,
+    .menu-close-btn {
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        border-radius: 50% !important;
+        color: #fff !important;
+        font-size: 1.1rem !important;
+        /* Balanced icon size */
+        cursor: pointer;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none !important;
+    }
+
+    .mobile-account-btn:hover,
+    .menu-toggle:hover,
+    .menu-close-btn:hover {
+        background: rgba(212, 175, 55, 0.2) !important;
+        transform: translateY(-2px);
+    }
+
+    /* Button Reset & Common Styles */
+    .mobile-account-btn,
+    .menu-toggle,
+    .menu-close-btn {
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        border-radius: 50% !important;
+        color: #fff !important;
+        font-size: 1.1rem !important;
+        cursor: pointer;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none !important;
+        padding: 0 !important;
+        /* Ensure no padding affects size */
+    }
+
+    /* Position Toggle and Close buttons absolutely WITHIN the wrapper */
+    .menu-toggle,
+    .menu-close-btn {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        /* Changed from right:0 to left:0 to match wrapper */
+        right: auto !important;
+        margin: 0 !important;
+    }
+
+    /* Ensure no duplicate/misplaced buttons show up outside wrapper context */
+    .mobile-header-controls>.menu-toggle {
+        position: relative !important;
+        /* Fallback if not wrapped (should be wrapped) */
+    }
+
+    /* Toggle Visibility Logic (Smooth replacement) */
+    .menu-close-btn {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    body.panel-open .menu-toggle {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    body.panel-open .menu-close-btn {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+
+    .menu-close-btn:hover {
+        background: rgba(212, 175, 55, 0.2) !important;
+        color: var(--accent-color) !important;
+    }
+
+    /* Hide any desktop account/profile elements on mobile */
+    .mobile-account-section,
+    .nav-links .user-profile-widget,
+    .nav-links .btn-outline {
+        display: none !important;
+    }
+
+    /* Account Panel styles moved to specific mobile query (<=767px) */
+
+    /* Sliding Menu (Right side) */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        transform: translateX(100%);
+        width: min(85vw, 360px);
+        height: 100vh;
+        background: #080a0d;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 100px 0 30px;
+        /* Clear header height */
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 9999;
+        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9);
+        border-left: 1px solid rgba(212, 175, 55, 0.2);
+        overflow-y: auto;
+        display: flex !important;
+        pointer-events: auto;
+        backdrop-filter: none !important;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    .nav-links a {
+        font-size: 15px;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 500;
+        letter-spacing: 1px;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 18px 30px;
+        color: #ffffff !important;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .nav-links a:active,
+    .nav-links a.active {
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--accent-color) !important;
+        padding-left: 40px;
+    }
+
+    /* Hide unnecessary desktop elements in mobile menu */
+    .nav-links .user-profile-widget,
+    .nav-links .btn-outline {
+        display: none !important;
+    }
+
+    /* Home Page & Elite Page Top Section Fixes */
+    .hero,
+    .elite-hero {
+        background-position: center top !important;
+        background-attachment: scroll !important;
+        height: auto !important;
+        min-height: 100vh;
+        padding-top: 100px;
+        padding-bottom: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .hero h1,
+    .elite-hero h1 {
+        font-size: 2.4rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 20px !important;
+        word-wrap: break-word;
+    }
+
+    .hero p {
+        font-size: 1.05rem !important;
+        line-height: 1.6;
+        padding: 0 10px;
+        margin-bottom: 35px !important;
+    }
+
+    /* Mobile Stacked Buttons */
+    .hero .btn,
+    .hero .btn-outline {
+        display: block !important;
+        width: 100% !important;
+        margin: 15px auto 0 !important;
+        padding: 16px 20px !important;
+        text-align: center;
+        margin-left: 0 !important;
+    }
+
+    /* Responsive Grids & Components */
+    .properties-grid,
+    .city-grid,
+    .blog-grid,
+    .experience-grid,
+    .elite-card-row,
+    .mastery-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+
+    .mastery-image-stack {
+        height: 400px;
+        margin-bottom: 30px;
+    }
+
+    .mastery-img-big {
+        height: 300px;
+        width: 100%;
+    }
+
+    .mastery-img-small {
+        height: 200px;
+        width: 60%;
+        bottom: 0;
+        right: 0;
+    }
+
+    .trust-logos-container {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .trust-logo {
+        font-size: 2.5rem;
+    }
+
+    .feature-box,
+    .city-intro-banner,
+    .property-card,
+    .blog-card,
+    .elite-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Footer Responsive */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-brand,
+    .footer-links,
+    .contact-info,
+    .newsletter-content {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact-info li {
+        justify-content: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .newsletter-form {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .newsletter-input,
+    .newsletter-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Lock Body Scroll */
+    body.panel-open {
+        overflow: hidden !important;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Menu Overlay */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        z-index: 9998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Elite Residences Page Fixes (<=768px) */
+    .clident-trust {
+        padding: 80px 0 !important;
+    }
+
+    .trust-logos-container {
+        flex-direction: column !important;
+        gap: 40px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .trust-logo {
+        font-size: 2.2rem !important;
+    }
+
+    /* Fix testimonial text and spacing */
+    .clident-trust [style*="margin-top: 80px"] {
+        margin-top: 40px !important;
+    }
+
+    .clident-trust p {
+        font-size: 1.1rem !important;
+        line-height: 1.6 !important;
+        padding: 0 10px;
+    }
+
+    /* Stack Hero buttons on small screens */
+    .elite-hero-text div[style*="display: flex"] {
+        flex-direction: column !important;
+        width: 100%;
+        gap: 15px !important;
+    }
+
+    .elite-hero-text .btn,
+    .elite-hero-text .btn-outline {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Fix image stack overlap in Mastery section */
+    .mastery-image-stack {
+        height: auto !important;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mastery-img-big,
+    .mastery-img-small {
+        position: relative !important;
+        width: 100% !important;
+        height: 300px !important;
+        border-radius: 8px !important;
+        border: 1px solid var(--glass-border) !important;
+        right: auto !important;
+        bottom: auto !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Mobile Account Panel - True Mobile & Tablet (<=1024px) */
+@media (max-width: 1024px) {
+    .mobile-account-panel {
+        display: block !important;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        width: 90%;
+        max-width: 360px;
+        background: #0c0e12;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 15px;
+        z-index: 10010;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        padding: 0;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .mobile-account-panel.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .account-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .account-panel-header h3 {
+        font-size: 1.1rem;
+        font-family: 'Outfit', sans-serif;
+        color: #fff;
+        margin: 0;
+    }
+
+    .panel-close-x {
+        background: none;
+        border: none;
+        color: #888;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 5px;
+        transition: 0.3s;
+    }
+
+    .panel-close-x:hover {
+        color: var(--accent-color);
+    }
+
+    .account-panel-content {
+        padding: 30px 25px;
+        text-align: center;
+    }
+
+    .account-panel-content p {
+        color: #aaa;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .account-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .account-actions .btn,
+    .account-actions .btn-outline {
+        width: 100%;
+        justify-content: center;
+        margin: 0 !important;
+        padding: 15px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Account Overlay */
+    .account-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 10008;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .account-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    body.account-panel-open {
+        overflow: hidden !important;
+    }
+}

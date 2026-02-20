@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>NexaHomes | Luxury Real Estate</title>
+    <meta name="description"
+        content="Exclusive luxury properties in the world's most desirable locations. Find your dream home with NexaHomes.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-account-btn" id="mobileAccountBtn" aria-label="User Account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="menu-toggle-wrapper" style="position: relative; width: 44px; height: 44px;">
+                    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html" class="active">Home</a>
+                <a href="elite-residences.html">Elite Residences</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger">
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="section-subtitle"
+                style="color: var(--accent-color); letter-spacing: 4px; display: block; margin-bottom: 20px; animation: fadeInUp 0.8s ease-out;">ESTABLISHED
+                EXCELLENCE</span>
+            <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 25px; animation: fadeInUp 1s ease-out;">
+                Experience Living <br>At The Highest Level</h1>
+            <p
+                style="max-width: 700px; margin: 0 auto 40px; font-size: 1.25rem; color: rgba(255,255,255,0.8); line-height: 1.7; animation: fadeInUp 1.2s ease-out;">
+                Curating an exclusive collection of the world's most prestigious residences. Where architectural mastery
+                meets bespoke living for the discerning few.</p>
+
+            <div style="display: flex; gap: 20px; justify-content: center; animation: fadeInUp 1.4s ease-out;">
+                <a href="properties.html" class="btn"
+                    style="padding: 18px 45px; font-size: 0.9rem; letter-spacing: 2px;">EXPLORE PORTFOLIO</a>
+                <a href="contact.html" class="btn btn-outline"
+                    style="padding: 18px 45px; font-size: 0.9rem; letter-spacing: 2px; margin-left: 0;">BOOK
+                    CONSULTATION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust/Stats Strip -->
+    <section style="padding: 60px 0; background-color: #080a0d; border-bottom: 1px solid var(--glass-border);">
+        <div class="container">
+            <div class="stats-strip" style="margin: 0; border: none; padding: 0;">
+                <div class="stat-item">
+                    <span class="stat-number" style="font-size: 3rem;">15+</span>
+                    <span class="stat-label">Years of Mastery</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" style="font-size: 3rem;">$2B+</span>
+                    <span class="stat-label">Volume Transacted</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" style="font-size: 3rem;">500+</span>
+                    <span class="stat-label">Elite Clientele</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" style="font-size: 3rem;">40+</span>
+                    <span class="stat-label">Global Markets</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elite Portfolio & City Showcase -->
+    <section id="portfolio" style="padding: 100px 0;">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 80px;">
+                <span class="section-subtitle"
+                    style="display: block; margin-bottom: 20px; letter-spacing: 6px; font-weight: 600; color: var(--accent-color); text-transform: uppercase;">A
+                    Legacy of Excellence</span>
+                <h2 class="section-title"
+                    style="font-size: 3.8rem; font-weight: 700; letter-spacing: -2px; margin-bottom: 30px; line-height: 1.1;">
+                    Signature Property Collection</h2>
+                <p
+                    style="max-width: 800px; margin: 0 auto; color: rgba(255,255,255,0.7); font-size: 1.25rem; line-height: 1.8; font-weight: 300;">
+                    An elite treasury of architectural masterpieces and legacy estates. From soaring penthouses to
+                    secluded waterfront sanctuaries, we curate the world's most coveted residential assets.</p>
+            </div>
+
+            <!-- City Card Selector -->
+            <div id="city-grid" class="city-grid" style="margin-bottom: 60px;">
+                <!-- Cities loaded via JS -->
+            </div>
+
+            <!-- Dynamic City Highlight Banner -->
+            <div id="city-banner-area" class="hidden" style="margin-bottom: 70px; animation: fadeInUp 0.8s ease;">
+                <!-- Banner loaded via JS -->
+            </div>
+
+            <!-- Combined Filter Bar (for types/all) -->
+            <div id="filter-bar" class="filter-bar" style="margin-bottom: 50px;">
+                <button class="filter-btn active" data-filter="all">Explore All Residences</button>
+            </div>
+
+            <div id="property-grid" class="properties-grid">
+                <!-- Properties loaded via JS -->
+            </div>
+
+            <div id="no-results" class="text-center hidden" style="margin-top: 50px;">
+                <p style="color: #aaa;">No properties found for this selection.</p>
+            </div>
+
+            <!-- Refined CTA Section -->
+            <div
+                style="text-align: center; margin-top: 100px; padding: 60px 20px; background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid var(--glass-border);">
+                <span class="section-subtitle"
+                    style="display: block; margin-bottom: 20px; letter-spacing: 4px; font-weight: 500; color: var(--accent-color); text-transform: uppercase; font-size: 0.9rem;">Discover
+                    the Collection</span>
+                <h2
+                    style="font-size: 3rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 25px; line-height: 1.2;">
+                    Explore Our Exclusive Residences</h2>
+                <p
+                    style="max-width: 650px; margin: 0 auto 40px; color: rgba(255,255,255,0.6); font-size: 1.15rem; line-height: 1.8; font-weight: 300;">
+                    Step into a curated portfolio of world-class properties across the most prestigious global
+                    destinations, crafted for those who seek timeless elegance and exceptional living.
+                </p>
+                <a href="properties.html" class="btn-prominent"
+                    style="padding: 16px 40px; font-size: 1rem; letter-spacing: 2px;">View Full Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 60px;">
+                <span class="section-subtitle">THE NEXAHOMES ADVANTAGE</span>
+                <h2 class="section-title">The Standard of Excellence</h2>
+                <p style="max-width: 700px; margin: 0 auto; color: #888;">We redefine the real estate experience through
+                    an uncompromising commitment to discretion, expertise, and personalized service.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-box text-center">
+                    <div class="feature-icon-wrapper"
+                        style="width: 80px; height: 80px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; transition: 0.3s;">
+                        <i class="fas fa-gem feature-icon" style="font-size: 2rem; margin-bottom: 0;"></i>
+                    </div>
+                    <h3>Curated Excellence</h3>
+                    <p>Each property in our portfolio underwent a rigorous 50-point evaluation for quality, design, and
+                        investment potential.</p>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="feature-icon-wrapper"
+                        style="width: 80px; height: 80px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; transition: 0.3s;">
+                        <i class="fas fa-handshake feature-icon" style="font-size: 2rem; margin-bottom: 0;"></i>
+                    </div>
+                    <h3>Strategic Advisory</h3>
+                    <p>Our advisors provide data-driven insights and stealth negotiation tactics to protect and grow
+                        your legacy assets.</p>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="feature-icon-wrapper"
+                        style="width: 80px; height: 80px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; transition: 0.3s;">
+                        <i class="fas fa-globe-americas feature-icon" style="font-size: 2rem; margin-bottom: 0;"></i>
+                    </div>
+                    <h3>Global Network</h3>
+                    <p>Unrivaled access to off-market opportunities and private listings across London, Dubai, Paris,
+                        and New York.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusive Services -->
+    <section style="background-color: #0f1219; padding: 100px 0;">
+        <div class="container">
+            <div class="flex justify-between items-end" style="margin-bottom: 60px; flex-wrap: wrap; gap: 30px;">
+                <div style="max-width: 600px;">
+                    <span class="section-subtitle">BEYOND TRANSACTIONS</span>
+                    <h2 class="section-title" style="margin-bottom: 0;">Exclusive Concierge Services</h2>
+                </div>
+                <a href="contact.html" class="btn-outline" style="margin-left: 0;">VIEW ALL SERVICES</a>
+            </div>
+
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                <div class="service-card"
+                    style="background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; transition: 0.4s;">
+                    <span
+                        style="color: var(--accent-color); font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: block;">01</span>
+                    <h3 style="margin-bottom: 15px; font-family: var(--font-heading);">Private Acquisition</h3>
+                    <p style="color: #aaa; margin-bottom: 0;">Professional representation for high-net-worth individuals
+                        seeking discreet property acquisition globally.</p>
+                </div>
+                <div class="service-card"
+                    style="background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; transition: 0.4s;">
+                    <span
+                        style="color: var(--accent-color); font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: block;">02</span>
+                    <h3 style="margin-bottom: 15px; font-family: var(--font-heading);">Investment Portfolios</h3>
+                    <p style="color: #aaa; margin-bottom: 0;">Curating diversified real estate portfolios optimized for
+                        yield and long-term capital appreciation.</p>
+                </div>
+                <div class="service-card"
+                    style="background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; transition: 0.4s;">
+                    <span
+                        style="color: var(--accent-color); font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: block;">03</span>
+                    <h3 style="margin-bottom: 15px; font-family: var(--font-heading);">Asset Management</h3>
+                    <p style="color: #aaa; margin-bottom: 0;">Comprehensive management of luxury estates, ensuring your
+                        investments are maintained to the highest standards.</p>
+                </div>
+                <div class="service-card"
+                    style="background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; transition: 0.4s;">
+                    <span
+                        style="color: var(--accent-color); font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: block;">04</span>
+                    <h3 style="margin-bottom: 15px; font-family: var(--font-heading);">Global Search</h3>
+                    <p style="color: #aaa; margin-bottom: 0;">Advanced mapping and reconnaissance for international
+                        buyers looking across multiple territories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Insights Section (Minimal Preview) -->
+    <section style="padding: 100px 0;">
+        <div class="container text-center">
+            <span class="section-subtitle">THE KNOWLEDGE HUB</span>
+            <h2 class="section-title">Latest Market Insights</h2>
+            <p style="max-width: 600px; margin: 0 auto 60px; color: #888;">Stay informed with expert analysis on global
+                luxury trends and architectural innovations.</p>
+
+            <div class="grid"
+                style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                <!-- Article 1 -->
+                <article
+                    style="text-align: left; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                    <div style="height: 220px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Market Trends" style="width:100%; height:100%; object-fit: cover;"
+                            onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    </div>
+                    <div style="padding: 30px;">
+                        <span
+                            style="color: var(--accent-color); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Real
+                            Estate</span>
+                        <h3 style="margin: 15px 0; font-size: 1.25rem;">Global Luxury Outlook 2026</h3>
+                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">Analysis of the shifting trends
+                            in high-net-worth migration and property demand.</p>
+                        <a href="blog.html" class="auth-link">Read More <i class="fas fa-arrow-right"
+                                style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article
+                    style="text-align: left; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                    <div style="height: 220px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Design" style="width:100%; height:100%; object-fit: cover;"
+                            onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    </div>
+                    <div style="padding: 30px;">
+                        <span
+                            style="color: var(--accent-color); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Architecture</span>
+                        <h3 style="margin: 15px 0; font-size: 1.25rem;">Designing for Vertical Living</h3>
+                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">How modern skyscrapers are
+                            redefining the concept of a "Penthouse" experience.</p>
+                        <a href="blog.html" class="auth-link">Read More <i class="fas fa-arrow-right"
+                                style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article
+                    style="text-align: left; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                    <div style="height: 220px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1554232456-8727aae0cfa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Investment" style="width:100%; height:100%; object-fit: cover;"
+                            onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    </div>
+                    <div style="padding: 30px;">
+                        <span
+                            style="color: var(--accent-color); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Investment</span>
+                        <h3 style="margin: 15px 0; font-size: 1.25rem;">The Rise of Smart Luxury</h3>
+                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">Integrating sustainable
+                            technology into the world's most expensive homes.</p>
+                        <a href="blog.html" class="auth-link">Read More <i class="fas fa-arrow-right"
+                                style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    </div>
+                </article>
+            </div>
+
+            <a href="blog.html" class="btn-prominent">VISIT KNOWLEDGE HUB</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Newsletter Section -->
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Content -->
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+
+                    <!-- Brand Column -->
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Home</a></li>
+                            <li><a href="elite-residences.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i>
+                                    Elite Residences</a></li>
+                            <li><a href="properties.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Properties</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Blog</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    About Us</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Services/Legal -->
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    FAQ</a></li>
+                            <li><a href="privacy-policy.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Terms of
+                                    Service</a></li>
+                            <li><a href="sitemap.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

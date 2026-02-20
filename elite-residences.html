@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Elite Residences | NexaHomes Signature Collection</title>
+    <meta name="description"
+        content="Step into the world's most exclusive luxury real estate collection. Elite Residences by NexaHomes.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+    <style>
+        /* Elite Residences Specific Styles */
+        .elite-page {
+            overflow-x: hidden;
+        }
+
+        .elite-hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: #080a0d;
+        }
+
+        .elite-hero-split {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .elite-hero-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 8%;
+            z-index: 2;
+        }
+
+        .elite-hero-image {
+            flex: 1.2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .elite-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+        }
+
+        .elite-hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #080a0d, transparent 30%);
+        }
+
+        .elite-hero h1 {
+            font-size: 5.5rem;
+            line-height: 1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .elite-hero p {
+            font-size: 1.35rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 550px;
+            margin-bottom: 45px;
+            line-height: 1.6;
+        }
+
+        .mastery-section {
+            padding: 150px 0;
+            background: #0c0e12;
+        }
+
+        .mastery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .mastery-content {
+            padding-right: 50px;
+        }
+
+        .mastery-image-stack {
+            position: relative;
+            height: 600px;
+        }
+
+        .mastery-img-big {
+            width: 80%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .mastery-img-small {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 10px solid #0c0e12;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .curated-showcase {
+            padding: 120px 0;
+            background: #080a0d;
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .elite-card-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .elite-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 4px;
+            transition: 0.5s ease;
+        }
+
+        .elite-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--accent-color);
+        }
+
+        .elite-card-img {
+            height: 400px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .elite-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s ease;
+        }
+
+        .elite-card:hover .elite-card-img img {
+            transform: scale(1.1);
+        }
+
+        .experience-section {
+            padding: 150px 0;
+            background: linear-gradient(rgba(8, 10, 13, 0.9), rgba(8, 10, 13, 0.9)), url('https://images.unsplash.com/photo-1512914890251-2ef5bb1e594c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .experience-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .experience-icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .experience-item:hover .experience-icon-box {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
+
+        .exp-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0;
+            display: block;
+        }
+
+        .clident-trust {
+            padding: 100px 0;
+            border-top: 1px solid var(--glass-border);
+            background: #080a0d;
+        }
+
+        @media (max-width: 1200px) {
+            .elite-hero h1 {
+                font-size: 4rem;
+            }
+
+            .mastery-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .mastery-content {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .elite-card-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .elite-hero-split {
+                flex-direction: column;
+            }
+
+            .elite-hero-text {
+                padding: 120px 20px 60px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .elite-hero-image {
+                display: none;
+            }
+
+            .elite-hero h1 {
+                font-size: 3rem;
+            }
+
+            .elite-card-row {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .trust-logos-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .trust-logo {
+            font-size: 3rem;
+            color: #d4af37;
+            /* Soft metallic gold */
+            opacity: 0.4;
+            /* Subtle premium tone */
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .trust-logo:hover {
+            opacity: 1;
+            color: #fff;
+            /* Brightens to white/gold interaction */
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        }
+
+        @media (max-width: 768px) {
+            .trust-logos-container {
+                justify-content: center;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body class="elite-page">
+
+    <!-- Header -->
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-account-btn" id="mobileAccountBtn" aria-label="User Account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="menu-toggle-wrapper" style="position: relative; width: 44px; height: 44px;">
+                    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="elite-residences.html" class="active">Elite Residences</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger">
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Elite Hero -->
+    <section class="elite-hero">
+        <div class="elite-hero-split">
+            <div class="elite-hero-text">
+                <span class="section-subtitle"
+                    style="color: var(--accent-color); letter-spacing: 5px; margin-bottom: 20px;">NEXA SIGNATURE</span>
+                <h1>Transcending <br>Standard Luxury</h1>
+                <p>Welcome to the Elite Residences Collection—an uncompromising treasury of the world's most significant
+                    real estate assets, curated for architectural purity and unparalleled heritage.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#showcase" class="btn">VIEW COLLECTION</a>
+                    <a href="contact.html" class="btn-outline" style="margin-left: 0;">PRIVATE INQUIRY</a>
+                </div>
+            </div>
+            <div class="elite-hero-image">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    alt="Elite Property" onerror="this.onerror=null;this.src='assets/images/hero.png';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Architectural Mastery -->
+    <section class="mastery-section">
+        <div class="container">
+            <div class="mastery-grid">
+                <div class="mastery-image-stack">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Architectural Mastery" class="mastery-img-big"
+                        onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Design Detail" class="mastery-img-small"
+                        onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                </div>
+                <div class="mastery-content">
+                    <span class="section-subtitle">THE PHILOSOPHY</span>
+                    <h2 style="font-size: 3.5rem; margin-bottom: 30px;">Architecture as Art</h2>
+                    <p style="color: #aaa; margin-bottom: 30px; font-size: 1.1rem; line-height: 1.8;">At NexaHomes, we
+                        believe a residence is more than a structure—it is a vessel for legacy. We focus on properties
+                        that push the boundaries of design, from brutalist masterpieces to classical estates spanning
+                        centuries of history.</p>
+                    <ul style="color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i>
+                            Visionary Design</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Rare
+                            Materials</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i>
+                            Historical Significance</li>
+                        <li><i class="fas fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Future
+                            Stability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curated Showcase -->
+    <section class="curated-showcase" id="showcase">
+        <div class="container">
+            <div class="showcase-header">
+                <span class="section-subtitle">CURRENT HIGHLIGHTS</span>
+                <h2 style="font-size: 3.5rem;">Curated Elite Portfolio</h2>
+                <p style="color: #888; max-width: 600px; margin: 20px auto 0;">A selection of our most requested
+                    off-market and signature listings currently available to our private network.</p>
+            </div>
+
+            <div class="elite-card-row">
+                <!-- Elite Card 1 -->
+                <div class="elite-card">
+                    <div class="elite-card-img">
+                        <img src="https://images.unsplash.com/photo-1600596542815-27b88e31e971?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="The Heritage Manor" onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    </div>
+                    <span
+                        style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px;">LOS
+                        ANGELES, CA</span>
+                    <h3 style="font-size: 1.5rem; margin: 10px 0;">The Heritage Manor</h3>
+                    <p style="color: #888; font-size: 0.95rem; margin-bottom: 20px;">A 18,500 sqft masterpiece of
+                        classical architecture set in the heart of Bel Air.</p>
+                    <div class="flex justify-between items-center">
+                        <span style="font-size: 1.4rem; color: #fff;">$45,000,000</span>
+                        <a href="properties.html" class="auth-link">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <!-- Elite Card 2 -->
+                <div class="elite-card">
+                    <div class="elite-card-img">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="The Glass Atrium" onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    </div>
+                    <span
+                        style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px;">NEW
+                        YORK, NY</span>
+                    <h3 style="font-size: 1.5rem; margin: 10px 0;">The Glass Atrium</h3>
+                    <p style="color: #888; font-size: 0.95rem; margin-bottom: 20px;">A visionary townhouse
+                        reconstruction featuring a four-story vertical conservatory.</p>
+                    <div class="flex justify-between items-center">
+                        <span style="font-size: 1.4rem; color: #fff;">$9,900,000</span>
+                        <a href="properties.html" class="auth-link">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <!-- Elite Card 3 -->
+                <div class="elite-card">
+                    <div class="elite-card-img">
+                        <img src="https://images.unsplash.com/photo-15197800004456-62df860a4f5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="The Icicle Manor" onerror="this.onerror=null;this.src='assets/images/hero.png';">
+                    </div>
+                    <span
+                        style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px;">ASPEN,
+                        CO</span>
+                    <h3 style="font-size: 1.5rem; margin: 10px 0;">The Icicle Manor</h3>
+                    <p style="color: #888; font-size: 0.95rem; margin-bottom: 20px;">Ski-in/ski-out architectural legacy
+                        spanning across three private mountain ridges.</p>
+                    <div class="flex justify-between items-center">
+                        <span style="font-size: 1.4rem; color: #fff;">$31,500,000</span>
+                        <a href="properties.html" class="auth-link">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="properties.html" class="btn">DISCOVER FULL PORTFOLIO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lifestyle Experiences -->
+    <section class="experience-section">
+        <div class="container">
+            <div class="showcase-header">
+                <span class="section-subtitle">THE NEXA LIFESTYLE</span>
+                <h2 style="font-size: 3.5rem;">Beyond the Residence</h2>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <div class="experience-icon-box">
+                        <i class="fas fa-concierge-bell exp-icon"></i>
+                    </div>
+                    <h3>Private Concierge</h3>
+                    <p style="color: #aaa; margin-top: 15px;">24/7 dedicated assistance for all lifestyle needs, from
+                        travel to security.</p>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-icon-box">
+                        <i class="fas fa-plane exp-icon"></i>
+                    </div>
+                    <h3>Global Mobility</h3>
+                    <p style="color: #aaa; margin-top: 15px;">Seamless relocation and private transport across our
+                        global network.</p>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-icon-box">
+                        <i class="fas fa-shield-alt exp-icon"></i>
+                    </div>
+                    <h3>Discrete Security</h3>
+                    <p style="color: #aaa; margin-top: 15px;">State-of-the-art protection for both your residence and
+                        your privacy.</p>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-icon-box">
+                        <i class="fas fa-wine-glass exp-icon"></i>
+                    </div>
+                    <h3>Elite Networking</h3>
+                    <p style="color: #aaa; margin-top: 15px;">Exclusive access to high-net-worth events and private club
+                        memberships.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Trust Indicators -->
+    <section class="clident-trust">
+        <div class="container">
+            <div class="flex flex-col items-center">
+                <span class="section-subtitle" style="margin-bottom: 30px;">TRUSTED BY THE DISCERNING FEW</span>
+                <div class="trust-logos-container">
+                    <i class="fab fa-apple trust-logo"></i>
+                    <i class="fab fa-microsoft trust-logo"></i>
+                    <i class="fab fa-google trust-logo"></i>
+                    <i class="fab fa-amazon trust-logo"></i>
+                    <i class="fab fa-meta trust-logo"></i>
+                </div>
+                <div style="margin-top: 80px; text-align: center; max-width: 800px;">
+                    <p style="font-size: 1.5rem; line-height: 1.6; font-style: italic; color: #ddd;">"Working with
+                        NexaHomes was a revelation. Their discrete approach and deep understanding of architectural
+                        significance secured us a piece of history that wasn't even on the market."</p>
+                    <span style="display: block; margin-top: 20px; color: var(--accent-color); font-weight: 600;">— S.
+                        DE VILLIERS, FOUNDER OF GLOBAL TECH</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section style="padding: 120px 0; background: #0c0e12;">
+        <div class="container text-center">
+            <h2 style="font-size: 4rem; margin-bottom: 30px;">Your Legacy Starts Here</h2>
+            <p style="color: #aaa; max-width: 600px; margin: 0 auto 50px; font-size: 1.25rem;">Apply for invitation to
+                our exclusive network and gain access to off-market opportunities worldwide.</p>
+            <a href="contact.html" class="btn-prominent"
+                style="padding: 20px 60px; font-size: 1.1rem; letter-spacing: 3px;">REQUEST INVITATION</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="elite-residences.html">Elite Residences</a></li>
+                            <li><a href="properties.html">Properties</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

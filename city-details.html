@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>City Details | NexaHomes</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+    <style>
+        .city-hero {
+            height: 70vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .city-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: transform 0.8s ease;
+        }
+
+        .city-hero:hover .city-hero-bg {
+            transform: scale(1.05);
+        }
+
+        .city-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(12, 14, 18, 1));
+            z-index: 0;
+        }
+
+        .city-hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .city-hero h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .city-description-section {
+            padding: 100px 0;
+        }
+
+        .highlights-grid {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .highlight-item {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .highlight-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .city-properties-section {
+            padding: 100px 0;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        @media (max-width: 768px) {
+            .city-hero h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-user-icon"><i class="fas fa-user"></i></a>
+                <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="elite-residences.html">Elite Residences</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger">
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- City Hero -->
+    <section class="city-hero" id="city-hero">
+        <div class="city-hero-bg" id="city-hero-bg"></div>
+        <div class="city-hero-overlay"></div>
+        <div class="city-hero-content container">
+            <span class="section-subtitle"
+                style="display: block; margin-bottom: 20px; letter-spacing: 5px; font-weight: 600; color: var(--accent-color);">PREMIER
+                DESTINATION</span>
+            <h1 id="city-title"
+                style="font-size: 5.5rem; font-weight: 700; letter-spacing: -3px; margin-bottom: 25px; line-height: 1.1;">
+                City Name</h1>
+            <p id="city-tagline"
+                style="font-size: 1.4rem; color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                A fusion of legacy architecture and contemporary luxury living.</p>
+        </div>
+    </section>
+
+    <!-- City Description -->
+    <section class="city-description-section">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 100px; align-items: start;">
+                <div style="position: sticky; top: 120px;">
+                    <span class="section-subtitle"
+                        style="color: var(--accent-color); letter-spacing: 3px; font-weight: 600;">THE LIFESTYLE</span>
+                    <h2 id="city-heading"
+                        style="font-size: 3rem; margin: 20px 0 30px; font-weight: 700; letter-spacing: -1px;">Luxury
+                        Living in City</h2>
+                    <p id="city-description"
+                        style="color: rgba(255,255,255,0.6); font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px; text-align: justify;">
+                        Loading description...
+                    </p>
+                    <div style="display: flex; gap: 20px;">
+                        <a href="#featured-properties" class="btn">Explore Portfolio</a>
+                        <a href="contact.html" class="btn-outline" style="margin: 0;">Inquire Info</a>
+                    </div>
+                </div>
+                <div class="city-images-stack" id="city-side-grid" style="display: grid; gap: 30px;">
+                    <!-- Images loaded via JS -->
+                </div>
+            </div>
+
+            <div class="highlights-grid" id="city-highlights" style="margin-top: 100px;">
+                <!-- Highlights loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties in City -->
+    <section class="city-properties-section" id="featured-properties">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 60px;">
+                <span class="section-subtitle">LOCAL PORTFOLIO</span>
+                <h2>Exclusive Listings</h2>
+            </div>
+
+            <div id="property-grid" class="properties-grid">
+                <!-- Properties loaded via JS -->
+            </div>
+
+            <div id="no-properties" class="text-center hidden" style="padding: 50px 0;">
+                <p style="color: #888;">We currently have no available properties in this location.</p>
+                <a href="contact.html" class="btn-outline" style="margin-top: 20px;">Contact Concierge</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="properties.html">Properties</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cityName = urlParams.get('city');
+
+            if (cityName && typeof cityData !== 'undefined' && cityData[cityName]) {
+                const city = cityData[cityName];
+
+                // Set text content
+                document.title = `${city.title} | NexaHomes Portfolio`;
+                document.getElementById('city-title').textContent = city.title;
+                document.getElementById('city-heading').textContent = `The ${city.title} Lifestyle`;
+                document.getElementById('city-description').textContent = city.description;
+                document.getElementById('city-tagline').textContent = `Discover the most exclusive real estate opportunities in the heart of ${city.title}.`;
+
+                // Set hero background
+                const heroBg = document.getElementById('city-hero-bg');
+                heroBg.style.backgroundImage = `url('${city.images[0]}')`;
+
+                // Load side imagery stack
+                const sideGrid = document.getElementById('city-side-grid');
+                if (sideGrid) {
+                    sideGrid.innerHTML = '';
+                    city.images.slice(0, 3).forEach((img) => {
+                        const imgEl = document.createElement('img');
+                        imgEl.src = img;
+                        imgEl.style.width = '100%';
+                        imgEl.style.borderRadius = '12px';
+                        imgEl.style.boxShadow = '0 20px 40px rgba(0,0,0,0.4)';
+                        imgEl.style.border = '1px solid var(--glass-border)';
+                        imgEl.alt = city.title;
+                        sideGrid.appendChild(imgEl);
+                    });
+                }
+
+                // Load highlights
+                const highlightsGrid = document.getElementById('city-highlights');
+                if (highlightsGrid) {
+                    highlightsGrid.innerHTML = '';
+                    city.highlights.forEach(h => {
+                        const item = document.createElement('div');
+                        item.className = 'highlight-item';
+                        item.innerHTML = `
+                            <i class="fas ${h.icon} highlight-icon"></i>
+                            <h3>${h.title}</h3>
+                            <p style="color: #aaa; font-size: 0.95rem;">${h.desc}</p>
+                        `;
+                        highlightsGrid.appendChild(item);
+                    });
+                }
+
+                // Load related properties
+                const cityProperties = properties.filter(p => p.city === cityName);
+                if (cityProperties.length > 0) {
+                    renderProperties(cityProperties);
+                } else {
+                    document.getElementById('no-properties').classList.remove('hidden');
+                }
+
+                // Smooth scroll for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            } else {
+                // Redirect to index if city not found
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+
+</html>
