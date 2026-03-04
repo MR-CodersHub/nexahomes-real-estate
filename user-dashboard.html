@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Member Dashboard | NexaHomes</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS Base -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --dashboard-bg: #05070a;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --accent-gold: #d4af37;
+            --accent-gold-soft: rgba(212, 175, 55, 0.1);
+            --card-padding: clamp(15px, 4vw, 30px);
+            --card-radius: 20px;
+            --btn-height: 48px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dashboard-bg);
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: clamp(40px, 8vw, 80px);
+        }
+
+        /* Layout Structure */
+        .dashboard-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(10px, 3vw, 40px) clamp(10px, 3vw, 20px);
+        }
+
+        /* Top Header Navigation style */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(20px, 5vw, 50px);
+            background: rgba(255, 255, 255, 0.02);
+            padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 30px);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
+            flex-wrap: nowrap;
+            position: sticky;
+            top: clamp(10px, 2vw, 20px);
+            z-index: 1000;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            height: clamp(28px, 5vw, 35px);
+            width: auto;
+            max-width: 100%;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 3vw, 20px);
+            flex-shrink: 0;
+        }
+
+        .header-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-mini {
+            width: clamp(32px, 5vw, 40px);
+            height: clamp(32px, 5vw, 40px);
+            border-radius: 50%;
+            background: var(--accent-gold);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(14px, 2.5vw, 16px);
+            flex-shrink: 0;
+        }
+
+        .user-name-mini {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .desktop-only {
+            display: block;
+        }
+
+        .logout-mini-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            padding: 0 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+            height: var(--btn-height);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logout-mini-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hamburger-btn {
+            cursor: pointer;
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            color: #fff;
+            display: none;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            width: var(--btn-height);
+            height: var(--btn-height);
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Main Grid */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: clamp(20px, 4vw, 40px);
+        }
+
+        /* Sidebar Side */
+        .dash-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 4vw, 30px);
+        }
+
+        .premium-profile-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--card-radius);
+            padding: var(--card-padding);
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+        }
+
+        .avatar-container {
+            width: 40%;
+            min-width: 80px;
+            max-width: 110px;
+            aspect-ratio: 1 / 1;
+            margin: 0 auto 25px;
+            position: relative;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--accent-gold), transparent);
+            border-radius: 50%;
+        }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            background: #0a0c10;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+        }
+
+        .profile-info h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        .profile-info p {
+            color: #666;
+            font-size: clamp(0.85rem, 3vw, 0.95rem);
+            margin-bottom: 30px;
+            word-wrap: break-word;
+        }
+
+        .profile-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .dash-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--btn-height);
+            border: 1px solid var(--border-glass);
+            background: transparent;
+            color: #fff;
+            padding: 0 15px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        .dash-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: var(--accent-gold-soft);
+            transform: translateY(-2px);
+        }
+
+        .dash-btn.active {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+
+        /* Stats & Grids */
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(15px, 3vw, 25px);
+        }
+
+        .stat-mini-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            padding: var(--card-padding);
+            border-radius: var(--card-radius);
+            text-align: center;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stat-mini-card:hover {
+            border-color: var(--accent-gold-soft);
+            transform: scale(1.02);
+        }
+
+        .stat-mini-card i {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-mini-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-mini-card span {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content Side */
+        .dash-content {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(30px, 5vw, 40px);
+        }
+
+        .content-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--card-radius);
+            padding: var(--card-padding);
+        }
+
+        .card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(20px, 4vw, 30px);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .card-title-row h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            position: relative;
+        }
+
+        .card-title-row h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .action-link {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .action-link:hover {
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+        }
+
+        /* Modern Property Grid */
+        .prop-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .prop-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .prop-img-box {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-top-left-radius: var(--card-radius);
+            border-top-right-radius: var(--card-radius);
+        }
+
+        .prop-img-box img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .prop-item:hover .prop-img-box img {
+            transform: scale(1.1);
+        }
+
+        .prop-info-box {
+            padding: var(--card-padding);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .prop-info-box h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .prop-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        .prop-price {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Inquiry Cards */
+        .inquiry-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--card-radius);
+            padding: var(--card-padding);
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .inquiry-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .status-pill::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Modals Glassmorphism */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(10px, 3vw, 20px);
+            overflow-y: auto;
+        }
+
+        .modal-inner {
+            background: #0a0e14;
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 500px;
+            padding: clamp(20px, 5vw, 40px);
+            position: relative;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: auto;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: clamp(15px, 3vw, 25px);
+            right: clamp(15px, 3vw, 25px);
+            background: none;
+            border: none;
+            color: #555;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-overlay {
+            display: none;
+        }
+
+        .sidebar-close {
+            display: none;
+        }
+
+        .mobile-sidebar-title {
+            display: none;
+        }
+
+        /* Input Styles */
+        .auth-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .dash-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .desktop-only {
+                display: none !important;
+            }
+
+            .hamburger-btn {
+                display: flex;
+            }
+
+            .sidebar-overlay {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                z-index: 9998;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+
+            .sidebar-overlay.show {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .sidebar-close {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--btn-height);
+                height: var(--btn-height);
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                font-size: 1.2rem;
+                color: #fff;
+                cursor: pointer;
+                transition: 0.3s;
+                flex-shrink: 0;
+            }
+
+            .sidebar-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .mobile-sidebar-title {
+                display: block;
+            }
+
+            .dash-sidebar {
+                position: fixed;
+                top: 0;
+                left: -320px;
+                width: 320px;
+                max-width: 85vw;
+                /* never overflow the screen */
+                height: 100vh;
+                background: var(--dashboard-bg);
+                z-index: 9999;
+                padding: clamp(20px, 4vw, 40px) clamp(15px, 3vw, 20px);
+                overflow-y: auto;
+                transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                border-right: 1px solid var(--border-glass);
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.8);
+            }
+
+            .dash-sidebar.open {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logout-mini-btn span {
+                display: none;
+            }
+
+            .logout-mini-btn {
+                padding: 0 10px;
+                width: var(--btn-height);
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scripts - Auth Guard -->
+    <script src="assets/js/auth.js"></script>
+    <script>
+        if (typeof Auth !== 'undefined' && Auth.guardUser) {
+            Auth.guardUser();
+        }
+    </script>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Top Header Overlay -->
+        <header class="dash-header">
+            <a href="index.html" class="logo-link brand-link">
+                <img src="assets/images/logo.svg" alt="NexaHomes" class="logo-img">
+            </a>
+            <div class="header-right">
+                <div class="header-user-info">
+                    <div class="avatar-mini">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="user-name-mini desktop-only" id="user-display-name-header">Valued Member</span>
+                </div>
+                <button onclick="logoutAction()" class="logout-mini-btn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="desktop-only">Logout</span>
+                </button>
+                <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <main class="dash-grid">
+            <!-- Left Column: Primary User Info -->
+            <aside class="dash-sidebar" id="dash-sidebar">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <h2 class="mobile-sidebar-title"
+                        style="font-family: 'Outfit'; font-size: 1.2rem; margin: 0; color: #fff;">Navigation</h2>
+                    <div class="sidebar-close" onclick="toggleSidebar()">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="premium-profile-card">
+                    <div class="avatar-container">
+                        <div class="avatar-inner">
+                            <i class="fas fa-user-crown"></i>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="user-display-name-card">Client Name</h2>
+                        <p id="user-display-email-card">client@nexahomes.com</p>
+                    </div>
+                    <div class="profile-buttons">
+                        <button class="dash-btn active" onclick="openModal('profileModal')">Edit Profile</button>
+                        <button class="dash-btn" onclick="openModal('membershipModal')">Membership Details</button>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="responsive-grid" id="stats-grid">
+                    <div class="stat-mini-card">
+                        <i class="fas fa-heart"></i>
+                        <h3 id="saved-count-mini">--</h3>
+                        <span>Saved</span>
+                    </div>
+                    <div class="stat-mini-card">
+                        <i class="fas fa-paper-plane"></i>
+                        <h3 id="inquiry-count-mini">--</h3>
+                        <span>Inquiries</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Column: Interactive Content -->
+            <div class="dash-content">
+                <!-- Saved Properties Section -->
+                <section class="content-card">
+                    <div class="card-title-row">
+                        <h2>Saved Portfolio</h2>
+                        <a href="properties.html" class="action-link">Explore More <i class="fas fa-arrow-right"
+                                style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    </div>
+                    <div class="responsive-grid" id="main-properties-grid">
+                        <!-- Polished Property Cards injected here -->
+                    </div>
+                </section>
+
+                <!-- Inquiries Section -->
+                <section class="content-card">
+                    <div class="card-title-row">
+                        <h2>Inquiry Timeline</h2>
+                        <span class="action-link" onclick="alert('Exporting data...')">Export Report</span>
+                    </div>
+                    <div class="responsive-grid" id="main-inquiry-grid">
+                        <!-- Inquiry cards injected here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <div id="profileModal" class="modal-overlay">
+            <div class="modal-inner">
+                <button class="modal-close" onclick="closeModal('profileModal')" aria-label="Close"><i
+                        class="fas fa-times"></i></button>
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-family: 'Outfit'; margin-bottom: 8px;">Account Settings</h2>
+                    <p style="color: #666; font-size: 0.85rem;">Update your premium account identity</p>
+                </div>
+                <form id="profileEditFormRedesign">
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display: block; font-size: 0.7rem; color: #444; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Full
+                            Name</label>
+                        <input type="text" id="edit-name-new" class="auth-input" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display: block; font-size: 0.7rem; color: #444; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Email
+                            Address</label>
+                        <input type="email" id="edit-email-new" class="auth-input" required>
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <label
+                            style="display: block; font-size: 0.7rem; color: #444; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Secure
+                            Password</label>
+                        <input type="password" id="edit-password-new" class="auth-input"
+                            placeholder="Leave blank to keep current">
+                    </div>
+                    <button type="submit" class="dash-btn active">Commit
+                        Changes</button>
+                    <button type="button" class="dash-btn" style="margin-top: 10px; border: none;"
+                        onclick="closeModal('profileModal')">Discard</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="membershipModal" class="modal-overlay">
+            <div class="modal-inner">
+                <button class="modal-close" onclick="closeModal('membershipModal')" aria-label="Close"><i
+                        class="fas fa-times"></i></button>
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div
+                        style="width: 60px; height: 60px; background: var(--accent-gold-soft); color: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.5rem;">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h2 style="font-family: 'Outfit'; margin-bottom: 8px;">Platinum Elite Access</h2>
+                    <p style="color: #666; font-size: 0.85rem;">Validation Expires: Dec 2026</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.02); padding: 25px; border-radius: var(--card-radius); border: 1px solid var(--border-glass);">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li
+                            style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 0.9rem;">
+                            <i class="fas fa-check-circle" style="color: var(--accent-gold); font-size: 1.1rem;"></i>
+                            Priority viewings for non-listed assets
+                        </li>
+                        <li
+                            style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 0.9rem;">
+                            <i class="fas fa-check-circle" style="color: var(--accent-gold); font-size: 1.1rem;"></i>
+                            Dedicated 24/7 Lifestyle Manager
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 15px; font-size: 0.9rem;">
+                            <i class="fas fa-check-circle" style="color: var(--accent-gold); font-size: 1.1rem;"></i>
+                            Private chauffer for local tours
+                        </li>
+                    </ul>
+                </div>
+                <button class="dash-btn active" style="margin-top: 30px;" onclick="closeModal('membershipModal')">Close
+                    Panel</button>
+            </div>
+        </div>
+
+        <footer
+            style="margin-top: clamp(40px, 8vw, 60px); text-align: center; border-top: 1px solid var(--border-glass); padding-top: 40px;">
+            <p style="color: #444; font-size: 0.75rem; letter-spacing: 1px;">&copy; 2026 NEXAHOMES LUXURY REAL ESTATE.
+                ALL MEMBERSHIP DATA IS SECURED.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data State
+        const savedProperties = [
+            { id: 101, name: 'The Azure Residency', price: '$4,500,000', location: 'Dubai Marina', img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80' },
+            { id: 102, name: 'Skyline Penthouse', price: '$8,200,000', location: 'Manhattan, NY', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80' }
+        ];
+
+        const userInquiries = [
+            { id: 201, property: 'The Azure Residency', date: 'Oct 12, 2026', status: 'In Review', color: '#ff9800', agent: 'Marco Rossi' },
+            { id: 202, property: 'Elite Portfolio Inquiry', date: 'Sep 28, 2026', status: 'Completed', color: '#4caf50', agent: 'Sonia Varma' },
+            { id: 203, property: 'Investment Tour NYC', date: 'Sep 15, 2026', status: 'Pending', color: '#666', agent: 'Admin' }
+        ];
+
+        // Init Lifecycle
+        window.onload = () => {
+            syncUserData();
+            renderDashboardUI();
+        };
+
+        function logoutAction() {
+            if (typeof Auth !== 'undefined' && Auth.logout) {
+                Auth.logout();
+            } else {
+                alert("Logout processed.");
+            }
+        }
+
+        function syncUserData() {
+            if (typeof Auth === 'undefined') return;
+            const userData = Auth.getUser();
+            if (userData) {
+                const name = userData.name || 'Valued Member';
+                const email = userData.email || 'not_set@nexahomes.com';
+
+                document.getElementById('user-display-name-header').textContent = name;
+                document.getElementById('user-display-name-card').textContent = name;
+                document.getElementById('user-display-email-card').textContent = email;
+
+                document.getElementById('edit-name-new').value = name;
+                document.getElementById('edit-email-new').value = email;
+            }
+        }
+
+        function renderDashboardUI() {
+            // Stats
+            document.getElementById('saved-count-mini').textContent = savedProperties.length;
+            document.getElementById('inquiry-count-mini').textContent = userInquiries.length;
+
+            // Property Cards
+            const grid = document.getElementById('main-properties-grid');
+            grid.innerHTML = savedProperties.map(p => `
+                <div class="prop-item">
+                    <div class="prop-img-box">
+                        <img src="${p.img}" alt="${p.name}">
+                    </div>
+                    <div class="prop-info-box">
+                        <div>
+                            <h4>${p.name}</h4>
+                            <p style="font-size: 0.75rem; color: #555; margin-bottom: 15px;"><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i> ${p.location}</p>
+                        </div>
+                        <div class="prop-footer">
+                            <span class="prop-price">${p.price}</span>
+                            <i class="fas fa-ellipsis-h" style="color: #333; cursor: pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Inquiries Table -> Now Inquiry Cards inside Grid
+            const inquiryGrid = document.getElementById('main-inquiry-grid');
+            inquiryGrid.innerHTML = userInquiries.map(i => `
+                <div class="inquiry-card">
+                    <div>
+                        <h4 style="margin: 0 0 10px 0; font-family: 'Outfit'; font-size: 1.1rem;">${i.property}</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-calendar-alt"></i> ${i.date}
+                        </p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-glass); padding-top: 15px; margin-top: auto;">
+                        <span class="status-pill" style="color: ${i.color}; background: ${i.color}15;">
+                            ${i.status}
+                        </span>
+                        <span style="font-size: 0.85rem; color: #aaa;"><i class="fas fa-user-tie" style="margin-right: 5px;"></i> ${i.agent}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Logic
+        function openModal(id) {
+            const m = document.getElementById(id);
+            m.style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            const m = document.getElementById(id);
+            m.style.display = 'none';
+        }
+
+        // Profile Form Logic
+        document.getElementById('profileEditFormRedesign').onsubmit = (e) => {
+            e.preventDefault();
+            const newName = document.getElementById('edit-name-new').value;
+            const newEmail = document.getElementById('edit-email-new').value;
+
+            if (typeof Auth !== 'undefined') {
+                const userData = Auth.getUser();
+                if (userData) {
+                    userData.name = newName;
+                    userData.email = newEmail;
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+
+                    syncUserData();
+                    alert('Success: Your premium profile identity has been updated.');
+                    closeModal('profileModal');
+                }
+            } else {
+                alert('Success: Profile updated (Simulation).');
+                closeModal('profileModal');
+            }
+        };
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('dash-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+
+            // Prevent body scroll when sidebar is open on mobile
+            if (sidebar.classList.contains('open') && window.innerWidth <= 1024) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Global Overlay Close
+        window.onclick = (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+
+</html>

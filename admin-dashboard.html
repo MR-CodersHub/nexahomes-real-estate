@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Admin Panel | NexaHomes</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+        }
+
+        body {
+            background-color: #05070a;
+            color: #fff;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: #080a0d;
+            border-right: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 1100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 30px;
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+            position: relative;
+        }
+
+        .sidebar-header .logo:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: rgba(212, 175, 55, 0.05);
+            color: var(--accent-color);
+            border-left-color: var(--accent-color);
+        }
+
+        .menu-item i {
+            width: 20px;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-footer {
+            padding: 20px 30px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1050;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            transition: margin-left 0.3s ease;
+        }
+
+        .top-bar {
+            height: 80px;
+            background: #080a0d;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .admin-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .dashboard-grid {
+            padding: 30px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        /* Stats Card */
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+
+        .stat-info h3 {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Data Section */
+        .data-section {
+            padding: 0 40px 40px;
+        }
+
+        .section-box {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 1.15rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) transparent;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .admin-table th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .admin-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-color);
+            display: inline-block;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            :root {
+                --sidebar-width: 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .top-bar {
+                padding: 0 20px;
+            }
+
+            .dashboard-grid {
+                padding: 20px;
+            }
+
+            .data-section {
+                padding: 0 20px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar-right .admin-details {
+                display: none;
+            }
+
+            .section-header h2 {
+                width: 100%;
+            }
+
+            .section-header .btn-outline {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scripts - Auth Guard First -->
+    <script src="assets/js/auth.js"></script>
+    <script>
+        Auth.guardAdmin();
+    </script>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo" style="display: block; transition: 0.3s;">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 30px;">
+                <p style="color: var(--accent-color); font-size: 0.65rem; letter-spacing: 2px; margin-top: 5px;">ADMIN
+                    PANEL</p>
+            </a>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-home"></i>
+                <span>Property Management</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i>
+                <span>User Management</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-envelope"></i>
+                <span>Inquiries</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" onclick="Auth.logout()" class="menu-item" style="padding: 10px 0;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="menu-toggle" id="adminMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="admin-title" id="pageTitle">Overview</div>
+            </div>
+            <div class="top-bar-right" style="display: flex; align-items: center; gap: 15px;">
+                <div style="text-align: right;" class="admin-details">
+                    <p style="font-size: 0.85rem; font-weight: 600;" id="admin-name">Administrator</p>
+                    <p style="font-size: 0.7rem; color: #888;">System Controller</p>
+                </div>
+                <div
+                    style="width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 0.9rem;">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div id="dashboardSections">
+            <!-- OVERVIEW SECTION -->
+            <div id="section-dashboard" class="admin-section active">
+                <section class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-building"></i></div>
+                        <div class="stat-info">
+                            <h3>Properties</h3>
+                            <p id="total-props">--</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3>Users</h3>
+                            <p id="total-users">--</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-comments"></i></div>
+                        <div class="stat-info">
+                            <h3>Inquiries</h3>
+                            <p id="total-inq">--</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="stat-info">
+                            <h3>Revenue</h3>
+                            <p>$2.4M</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="data-section">
+                    <div class="section-box">
+                        <div class="section-header">
+                            <h2>Recent Activity</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Activity</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Today, 10:45 AM</td>
+                                        <td>New property added: "Emerald Villa"</td>
+                                        <td><span class="status-badge">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Oct 23, 4:12 PM</td>
+                                        <td>User alex.w@gmail.com updated profile</td>
+                                        <td><span class="status-badge">Success</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- PROPERTY MANAGEMENT SECTION -->
+            <div id="section-properties" class="admin-section">
+                <section class="data-section">
+                    <div class="section-box" style="margin-top: 30px;">
+                        <div class="section-header">
+                            <h2>Property Catalog</h2>
+                            <button class="btn" style="padding: 10px 20px; font-size: 0.8rem;"
+                                onclick="openPropModal()">+ ADD PROPERTY</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="props-table-body">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- USER MANAGEMENT SECTION -->
+            <div id="section-users" class="admin-section">
+                <section class="data-section">
+                    <div class="section-box" style="margin-top: 30px;">
+                        <div class="section-header">
+                            <h2>Global Users</h2>
+                            <button class="btn" style="padding: 10px 20px; font-size: 0.8rem;"
+                                onclick="openUserModal()">+ ADD USER</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- INQUIRIES SECTION -->
+            <div id="section-inquiries" class="admin-section">
+                <section class="data-section">
+                    <div class="section-box" style="margin-top: 30px;">
+                        <div class="section-header">
+                            <h2>Customer Inquiries</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>From</th>
+                                        <th>Message</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inq-table-body">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ANALYTICS SECTION -->
+            <div id="section-analytics" class="admin-section">
+                <section class="dashboard-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="section-box">
+                        <h3>View Traffic (Weekly)</h3>
+                        <div style="height: 200px; display: flex; align-items: flex-end; gap: 10px; padding-top: 20px;">
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 40%; border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 75%; border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 50%; border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 90%; border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 60%; border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 80%; border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="flex: 1; background: var(--accent-color); height: 30%; border-radius: 4px 4px 0 0;">
+                            </div>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.7rem; color: #555;">
+                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                        </div>
+                    </div>
+                    <div class="section-box">
+                        <h3>Revenue Distribution</h3>
+                        <div style="padding-top: 20px;">
+                            <div style="margin-bottom: 15px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                                    <span>Residential</span><span>72%</span>
+                                </div>
+                                <div
+                                    style="width: 100%; height: 8px; background: #111; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 72%; height: 100%; background: var(--accent-color);"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                                    <span>Commercial</span><span>28%</span>
+                                </div>
+                                <div
+                                    style="width: 100%; height: 8px; background: #111; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 28%; height: 100%; background: #666;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- SETTINGS SECTION -->
+            <div id="section-settings" class="admin-section">
+                <section class="data-section">
+                    <div class="section-box" style="margin-top: 30px; max-width: 600px;">
+                        <h2>Admin Settings</h2>
+                        <form id="settingsForm" style="margin-top: 30px;">
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-size: 0.8rem; color: #888; margin-bottom: 8px;">Full
+                                    Name</label>
+                                <input type="text" id="set-name" class="auth-input" placeholder="Administrator Name"
+                                    required>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-size: 0.8rem; color: #888; margin-bottom: 8px;">Email
+                                    Address</label>
+                                <input type="email" id="set-email" class="auth-input" placeholder="admin@gmail.com"
+                                    readonly style="opacity: 0.5;">
+                            </div>
+                            <div style="margin-bottom: 30px;">
+                                <label style="display: block; font-size: 0.8rem; color: #888; margin-bottom: 8px;">New
+                                    Password</label>
+                                <input type="password" id="set-pass" class="auth-input"
+                                    placeholder="Leave blank to keep current">
+                            </div>
+                            <button type="submit" class="btn">SAVE CHANGES</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Form (Property) -->
+    <div id="propModal" class="sidebar-overlay"
+        style="display: none; opacity: 1; align-items: center; justify-content: center;">
+        <div class="section-box" style="width: 90%; max-width: 500px; background: #0a0d12;">
+            <h2 id="propModalTitle">Add Property</h2>
+            <form id="propForm" style="margin-top: 20px;">
+                <input type="hidden" id="prop-id">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Property Name</label>
+                    <input type="text" id="prop-name" class="auth-input" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Location</label>
+                    <input type="text" id="prop-loc" class="auth-input" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Price</label>
+                    <input type="text" id="prop-price" class="auth-input" required>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Status</label>
+                    <select id="prop-status" class="auth-input"
+                        style="background: #000; border: 1px solid var(--glass-border); color: #fff;">
+                        <option value="Published">Published</option>
+                        <option value="Featured">Featured</option>
+                        <option value="Archived">Archived</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn" style="flex: 1;">SAVE</button>
+                    <button type="button" class="btn-outline" style="flex: 1;"
+                        onclick="closeModal('propModal')">CANCEL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Form (User) -->
+    <div id="userModal" class="sidebar-overlay"
+        style="display: none; opacity: 1; align-items: center; justify-content: center;">
+        <div class="section-box" style="width: 90%; max-width: 500px; background: #0a0d12;">
+            <h2>Add New User</h2>
+            <form id="userForm" style="margin-top: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Full Name</label>
+                    <input type="text" id="user-name-input" class="auth-input" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Email</label>
+                    <input type="email" id="user-email-input" class="auth-input" required>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.75rem; margin-bottom: 5px;">Role</label>
+                    <select id="user-role-input" class="auth-input"
+                        style="background: #000; border: 1px solid var(--glass-border); color: #fff;">
+                        <option value="User">User</option>
+                        <option value="Agent">Agent</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn" style="flex: 1;">REGISTER</button>
+                    <button type="button" class="btn-outline" style="flex: 1;"
+                        onclick="closeModal('userModal')">CANCEL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+            animation: fadeIn 0.4s easeOut;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        select.auth-input {
+            padding: 12px;
+        }
+    </style>
+
+    <script>
+        // State Management
+        let properties = [
+            { id: 1, name: 'The Azure Penthouse', loc: 'Dubai Marina', price: '$12,500,000', status: 'Published' },
+            { id: 2, name: 'Golden Gate Villa', loc: 'San Francisco', price: '$8,200,000', status: 'Featured' }
+        ];
+
+        let users = [
+            { id: 1, name: 'Alexander Wright', email: 'alex.w@gmail.com', role: 'User' },
+            { id: 2, name: 'Sophia Loren', email: 'sophia.l@outlook.com', role: 'Agent' }
+        ];
+
+        let inquiries = [
+            { id: 1, from: 'Michael Ross', msg: 'Schedule a viewing for Emerald Villa', status: 'Pending' },
+            { id: 2, from: 'Rachel Zane', msg: 'Inquiry about payment plans', status: 'Responded' }
+        ];
+
+        // Initialization
+        window.onload = () => {
+            renderAll();
+            const currUser = Auth.getUser();
+            if (currUser) {
+                document.getElementById('admin-name').textContent = currUser.name;
+                document.getElementById('set-name').value = currUser.name;
+                document.getElementById('set-email').value = currUser.email;
+            }
+        };
+
+        // Navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const span = item.querySelector('span');
+                if (!span) return;
+                const text = span.textContent.toLowerCase();
+
+                if (text === 'logout') return;
+
+                e.preventDefault();
+
+                // Update UI
+                document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+                item.classList.add('active');
+
+                const sectionId = 'section-' + (text === 'property management' ? 'properties' :
+                    text === 'user management' ? 'users' : text);
+
+                document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+                const targetSec = document.getElementById(sectionId);
+                if (targetSec) {
+                    targetSec.classList.add('active');
+                    document.getElementById('pageTitle').textContent = span.textContent;
+                }
+
+                if (window.innerWidth <= 992) toggleSidebar();
+            });
+        });
+
+        function renderAll() {
+            renderProperties();
+            renderUsers();
+            renderInquiries();
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('total-props').textContent = properties.length;
+            document.getElementById('total-users').textContent = users.length;
+            document.getElementById('total-inq').textContent = inquiries.length;
+        }
+
+        // Property CRUD
+        function renderProperties() {
+            const tbody = document.getElementById('props-table-body');
+            tbody.innerHTML = properties.map(p => `
+                <tr>
+                    <td>${p.name}</td>
+                    <td>${p.loc}</td>
+                    <td>${p.price}</td>
+                    <td><span class="status-badge">${p.status}</span></td>
+                    <td>
+                        <button class="action-btn" onclick="editProp(${p.id})"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn" onclick="deleteProp(${p.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openPropModal() {
+            document.getElementById('propForm').reset();
+            document.getElementById('prop-id').value = '';
+            document.getElementById('propModalTitle').textContent = 'Add Property';
+            document.getElementById('propModal').style.display = 'flex';
+        }
+
+        function editProp(id) {
+            const p = properties.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('prop-id').value = p.id;
+            document.getElementById('prop-name').value = p.name;
+            document.getElementById('prop-loc').value = p.loc;
+            document.getElementById('prop-price').value = p.price;
+            document.getElementById('prop-status').value = p.status;
+            document.getElementById('propModalTitle').textContent = 'Edit Property';
+            document.getElementById('propModal').style.display = 'flex';
+        }
+
+        function deleteProp(id) {
+            if (confirm('Are you sure you want to delete this property?')) {
+                properties = properties.filter(p => p.id !== id);
+                renderAll();
+            }
+        }
+
+        document.getElementById('propForm').onsubmit = (e) => {
+            e.preventDefault();
+            const id = document.getElementById('prop-id').value;
+            const data = {
+                name: document.getElementById('prop-name').value,
+                loc: document.getElementById('prop-loc').value,
+                price: document.getElementById('prop-price').value,
+                status: document.getElementById('prop-status').value
+            };
+
+            if (id) {
+                const idx = properties.findIndex(p => p.id == id);
+                properties[idx] = { ...properties[idx], ...data };
+            } else {
+                properties.push({ id: Date.now(), ...data });
+            }
+
+            closeModal('propModal');
+            renderAll();
+        };
+
+        // User CRUD
+        function renderUsers() {
+            const tbody = document.getElementById('users-table-body');
+            tbody.innerHTML = users.map(u => `
+                <tr>
+                    <td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>${u.role}</td>
+                    <td>
+                        <button class="action-btn" onclick="deleteUser(${u.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openUserModal() {
+            document.getElementById('userForm').reset();
+            document.getElementById('userModal').style.display = 'flex';
+        }
+
+        function deleteUser(id) {
+            if (confirm('Revoke access for this user?')) {
+                users = users.filter(u => u.id !== id);
+                renderAll();
+            }
+        }
+
+        document.getElementById('userForm').onsubmit = (e) => {
+            e.preventDefault();
+            users.push({
+                id: Date.now(),
+                name: document.getElementById('user-name-input').value,
+                email: document.getElementById('user-email-input').value,
+                role: document.getElementById('user-role-input').value
+            });
+            closeModal('userModal');
+            renderAll();
+        };
+
+        // Inquiries Logic
+        function renderInquiries() {
+            const tbody = document.getElementById('inq-table-body');
+            tbody.innerHTML = inquiries.map(i => `
+                <tr>
+                    <td>${i.from}</td>
+                    <td>${i.msg}</td>
+                    <td><span class="status-badge" style="background:${i.status === 'Pending' ? 'rgba(212,175,55,0.1)' : 'rgba(76,175,80,0.1)'}">${i.status}</span></td>
+                    <td>
+                        <button class="action-btn" onclick="updateInq(${i.id}, 'Responded')"><i class="fas fa-reply"></i></button>
+                        <button class="action-btn" onclick="updateInq(${i.id}, 'Closed')"><i class="fas fa-check"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateInq(id, status) {
+            const i = inquiries.find(x => x.id === id);
+            if (i) {
+                i.status = status;
+                renderInquiries();
+            }
+        }
+
+        // Settings Logic
+        document.getElementById('settingsForm').onsubmit = (e) => {
+            e.preventDefault();
+            const newName = document.getElementById('set-name').value;
+            const user = Auth.getUser();
+            if (user) {
+                user.name = newName;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                document.getElementById('admin-name').textContent = newName;
+                alert('Profile updated successfully!');
+            }
+        };
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Sidebar logic
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const toggleBtn = document.getElementById('adminMenuToggle');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'initial';
+        }
+
+        toggleBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+    </script>
+</body>
+
+</html>

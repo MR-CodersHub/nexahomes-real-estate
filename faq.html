@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>FAQ | NexaHomes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive_patches.css">
+    <style>
+        .faq-section {
+            padding: 100px 0;
+            background-color: var(--bg-color);
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            border-color: var(--accent-color);
+        }
+
+        .faq-question {
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 30px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            /* Approximate max height */
+            padding-bottom: 25px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div class="mobile-header-controls">
+                <a href="login.html" class="mobile-account-btn" id="mobileAccountBtn" aria-label="User Account">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="menu-toggle-wrapper" style="position: relative; width: 44px; height: 44px;">
+                    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+
+                <!-- User Profile Widget -->
+                <div class="user-profile-widget" style="position: relative; margin-left: 20px; margin-right: 10px;">
+                    <div class="profile-icon" id="profile-trigger">
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div class="profile-dropdown" id="profile-dropdown"></div>
+                </div>
+
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 0;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1556912173-3db9963eecc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about buying, selling, and investing with NexaHomes.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container" style="max-width: 800px;">
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I schedule a viewing?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>You can schedule a viewing by visiting the property page and clicking "Schedule Viewing," or by
+                        contacting our concierge team directly through the Contact page. We offer both in-person and
+                        virtual tours to suit your schedule.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you offer international property listings?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, NexaHomes specializes in luxury properties across the globe. Our "Global Reach" network
+                        ensures we have exclusive access to listings in major international markets including London,
+                        Dubai, Paris, and Tokyo.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What services do you provide for sellers?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We provide a comprehensive suite of services for sellers, including professional photography and
+                        videography, targeted global marketing campaigns, private showings, and expert negotiation
+                        strategies to maximize your property's value.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Is there a registration fee to join NexaHomes?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No, creating an account with NexaHomes is completely free. Registered users gain access to saved
+                        searches, exclusive "off-market" listings, and personalized property recommendations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How can I finance a luxury property purchase?</h3>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We work with a network of trusted financial advisors and private banks who specialize in
+                        high-value real estate transactions. We can connect you with the right experts to structure your
+                        financing efficiently.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Join Our Exclusive Network</h3>
+                        <p>Receive updates on new luxury listings and market insights directly to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 40px;">
+                        </a>
+                        <p>Redefining luxury real estate with an unwavering commitment to quality, innovation, and
+                            exceptional client service. Your journey to the extraordinary begins here.</p>
+
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Home</a></li>
+                            <li><a href="properties.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Properties</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Blog</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    About Us</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="faq.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    FAQ</a></li>
+                            <li><a href="privacy-policy.html"><i class="fas fa-chevron-right"
+                                        style="font-size: 0.7rem;"></i> Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Terms of
+                                    Service</a></li>
+                            <li><a href="sitemap.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                                    Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Luxury Lane, Penthouse Suite<br>Beverly Hills, CA 90210</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 (800) 555-0199</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>concierge@nexahomes.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved. Designed for Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Toggle current item
+                    item.classList.toggle('active');
+
+                    // Close other items (optional, but good for UX)
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Account Access | NexaHomes</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-links flex items-center">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="properties.html">Properties</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="btn-outline"
+                    style="padding: 8px 20px; font-size: 0.8rem; margin-left: 20px;">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="auth-wrapper">
+        <div class="auth-container">
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Log In</div>
+                <div class="auth-tab" data-tab="signup">Sign Up</div>
+            </div>
+
+            <div class="auth-form-container">
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="auth-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <label for="login-pass" style="margin-bottom: 0;">Password</label>
+                            <a href="#" class="auth-link" style="font-size: 0.8rem;">Forgot Password?</a>
+                        </div>
+                        <input type="password" id="login-pass" class="auth-input" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn auth-btn">SIGN IN</button>
+                    <div class="auth-footer">
+                        <p style="color: #888; font-size: 0.9rem;">Don't have an account? <a href="#" class="auth-link"
+                                data-switch="signup">Create one</a></p>
+                    </div>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" class="auth-input" placeholder="Enter your full name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" class="auth-input" placeholder="Enter your email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-pass">Password</label>
+                        <input type="password" id="signup-pass" class="auth-input" placeholder="Create a password"
+                            required>
+                    </div>
+                    <button type="submit" class="btn auth-btn">CREATE ACCOUNT</button>
+                    <div class="auth-footer">
+                        <p style="color: #888; font-size: 0.9rem;">Already have an account? <a href="#"
+                                class="auth-link" data-switch="login">Log In</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Overlay -->
+            <div id="success-overlay" class="success-overlay">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="success-title">Account Created!</h3>
+                <p class="success-text">Welcome to NexaHomes! Your account has been created successfully. You can now
+                    log in and start learning.</p>
+                <button type="button" class="btn" onclick="toggleAuth('login')" style="padding: 12px 30px;">GO TO
+                    LOGIN</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer style="margin-top: auto;">
+        <div class="copyright">
+            <div class="container">
+                &copy; 2026 Nexa<span>Homes</span>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth.js"></script>
+</body>
+
+</html>

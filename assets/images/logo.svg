@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none">
+  <!-- Defs for Gradient -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8e79c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Group for Icon and Text -->
+  <g>
+    <!-- Abstract Icon: N shape + Roof -->
+    <!-- Stylized Roof Peak -->
+    <path d="M25 5 L45 25 L5 25 Z" fill="url(#goldGradient)" />
+    <!-- Pillars/House Body forming abstract N -->
+    <rect x="10" y="25" width="8" height="25" fill="#ffffff" />
+    <rect x="32" y="25" width="8" height="25" fill="#ffffff" />
+    <path d="M10 25 L32 50" stroke="url(#goldGradient)" stroke-width="4" />
+    
+    <!-- Text: Nexa -->
+    <text x="60" y="42" font-family="'Outfit', sans-serif" font-weight="700" font-size="32" fill="#ffffff" letter-spacing="1">NEXA</text>
+    
+    <!-- Text: Homes -->
+    <text x="155" y="42" font-family="'Outfit', sans-serif" font-weight="400" font-size="32" fill="url(#goldGradient)" letter-spacing="1">HOMES</text>
+  </g>
+</svg>

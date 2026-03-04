@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <title>Messages | Admin Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="NexaHomes" style="height: 35px; display: block;">
+            </a>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <a href="#" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span
+                        style="position: absolute; top: -5px; right: -5px; background: red; color: #fff; font-size: 0.6rem; padding: 2px 5px; border-radius: 50%;">3</span>
+                </a>
+                <div
+                    style="width: 35px; height: 35px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    JD</div>
+            </div>
+        </div>
+    </header>
+
+    <section style="padding-top: 100px;">
+        <div class="container">
+            <div class="flex justify-between items-center" style="margin-bottom: 30px;">
+                <h2 class="section-title" style="margin-bottom: 0;">Messages</h2>
+                <button class="btn btn-outline" onclick="window.location.href='index.html'">Log Out</button>
+            </div>
+
+            <div class="message-list" id="messages-list">
+                <!-- Loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
